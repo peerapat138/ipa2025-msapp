@@ -1,0 +1,33 @@
+<html>
+
+<head>
+    <title>Routers</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+
+<body>
+    <h1>Register from {{request.remote_addr}}</h1>
+    <form method="POST" action="/add">
+        <input name="ip" placeholder="IP" required />
+        <input name="username" placeholder="USERNAME" required />
+        <input name="password" placeholder="PASSWORD" required />
+        <button type="submit">Add</button>
+    </form>
+
+    <h2>Router List</h2>
+
+    <ul>
+        {% for router in routers %}
+        <li>
+            {{ router.ip }} - {{ router.username }}
+            <form method="POST" action="{{ url_for('delete_router', id=router._id|string) }}" style="display:inline">
+                <button type="submit">Delete</button>
+            </form>
+
+        </li>
+        {% endfor %}
+    </ul>
+
+</body>
+
+</html>
