@@ -12,8 +12,6 @@ def get_router_info():
     routers = db["routers"]
 
     router_data = routers.find()
-    return router_data
-
-
+    return router_data  
 if __name__ == "__main__":
     get_router_info()
