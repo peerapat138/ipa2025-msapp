@@ -13,10 +13,13 @@ client = MongoClient(mongo_uri)
 db = client[db_name]
 routers = db["routers"]
 
+
 @app.route("/", methods=["GET"])
 def index():
-    return render_template("index.html",
-    routers=list(routers.find({}, {'password': 0})))
+    return render_template(
+        "index.html", routers=list(routers.find({}, {"password": 0}))
+    )
+
 
 @app.route("/add", methods=["POST"])
 def add_router():
@@ -25,17 +28,15 @@ def add_router():
     password = request.form.get("password")
 
     if ip and username and password:
-        routers.insert_one({
-            "ip": ip,
-            "username": username,
-            "password": password
-        })
+        routers.insert_one({"ip": ip, "username": username, "password": password})
     return redirect("/")
+
 
 @app.route("/delete/<id>", methods=["POST"])
 def delete_router(id):
     routers.delete_one({"_id": ObjectId(id)})
     return redirect("/")
+
 
 @app.route("/router/<ip>", methods=["GET"])
 def router_detail(ip):
@@ -46,6 +47,7 @@ def router_detail(ip):
         router_ip=ip,
         interface_data=docs,
     )
+
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=8080)
