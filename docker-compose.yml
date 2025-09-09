@@ -57,7 +57,7 @@ services:
     environment:
       MONGO_URI: "mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017/"
       DB_NAME: "IPA2025"
-    worker2:
+  worker2:
     build: ./worker
     depends_on:
       - mongo
@@ -70,7 +70,7 @@ services:
     environment:
       MONGO_URI: "mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017/"
       DB_NAME: "IPA2025"
-    worker3:
+  worker3:
     build: ./worker
     depends_on:
       - mongo
