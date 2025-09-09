@@ -44,7 +44,33 @@ services:
     environment:
       MONGO_URI: "mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017/"
       DB_NAME: "IPA2025"
-  worker:
+  worker1:
+    build: ./worker
+    depends_on:
+      - mongo
+      - rabbitmq
+      - scheduler
+    networks:
+      - app-net
+    env_file:
+      - .env
+    environment:
+      MONGO_URI: "mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017/"
+      DB_NAME: "IPA2025"
+    worker2:
+    build: ./worker
+    depends_on:
+      - mongo
+      - rabbitmq
+      - scheduler
+    networks:
+      - app-net
+    env_file:
+      - .env
+    environment:
+      MONGO_URI: "mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017/"
+      DB_NAME: "IPA2025"
+    worker3:
     build: ./worker
     depends_on:
       - mongo
